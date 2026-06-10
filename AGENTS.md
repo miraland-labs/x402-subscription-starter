@@ -4,14 +4,14 @@
 
 Reference **seller** for the x402 **`exact` subscription** pattern: one payment on `/subscribe` → JWT → Bearer on data routes → dual rate limits.
 
-Wire contract: [SUBSCRIPTION_PATTERN.md](../SUBSCRIPTION_PATTERN.md). Buyer SDK: [x402-subscription-client](../x402-subscription-client/).
+Wire contract: [SUBSCRIPTION_PATTERN.md](https://github.com/miraland-labs/x402/blob/master/SUBSCRIPTION_PATTERN.md). Buyer SDK: [x402-subscription-client](https://github.com/miraland-labs/x402-subscription-client).
 
 ---
 
 ## Invariants
 
 - HTTP **402 + JSON body** only on `POST /api/v1/subscribe?tier=<tier>` — never on data routes.
-- Env var names match [x402-seller-starter](../x402-seller-starter/) — do not rename.
+- Env var names match [x402-seller-starter](https://github.com/miraland-labs/x402-seller-starter) — do not rename.
 - **Pricing:** SQLite `parameters` table per `/api/v1/subscribe/<tier>` → fallback to env vars.
 - JWT: `payer` + `tier` claims; `exp` = `TIER_DURATIONS_SEC[tier]`.
 - Include `persistenceHint` on subscribe success and 401 responses — buyers must cache JWT locally.

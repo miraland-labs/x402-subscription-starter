@@ -34,21 +34,21 @@ Each tier uses endpoint key `/api/v1/subscribe/<tier>` with `X402_ACCEPTS_JSON` 
 
 The seller issues a JWT **once per x402 payment**. Subscribers must **save the token locally** — file, DB, or secrets manager. After app or machine restart, reuse the Bearer token until `exp`. Renew via `/subscribe` when `TOKEN_EXPIRED`.
 
-Subscribe response includes `persistenceHint`. Buyer SDK: [x402-subscription-client](../x402-subscription-client/).
+Subscribe response includes `persistenceHint`. Buyer SDK: [x402-subscription-client](https://github.com/miraland-labs/x402-subscription-client).
 
 ## Replace the stub route
 
 Copy `POST /api/v1/echo` pattern in `src/server.ts` — add your handlers behind `requireBearerToken` + `payerLimiter`.
 
-## Live example deployment
+## Operated example (API only)
 
-[FIFA World Cup scraper](https://fifa.polystrike.io/devnet) — domain-specific fork of this pattern (RSS news, operated host).
+The FIFA World Cup scraper runs the same pattern at `https://fifa.polystrike.io/devnet` — RSS news and related routes, no landing page. Start with `GET /health` or `GET /api/v1/subscribe/info`.
 
 ## Docs
 
-- [SUBSCRIPTION_PATTERN.md](../SUBSCRIPTION_PATTERN.md)
-- [x402-seller-starter](../x402-seller-starter/) — base x402 env contract
-- [x402-subscription-client](../x402-subscription-client/) — buyer SDK
+- [SUBSCRIPTION_PATTERN.md](https://github.com/miraland-labs/x402/blob/master/SUBSCRIPTION_PATTERN.md) (x402 hub)
+- [x402-seller-starter](https://github.com/miraland-labs/x402-seller-starter) — base x402 env contract
+- [x402-subscription-client](https://github.com/miraland-labs/x402-subscription-client) — buyer SDK
 
 ## Production database
 
