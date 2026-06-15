@@ -11,11 +11,15 @@
     "seed": "sqlite3 ${DATABASE_URL:-./data/subscription.db} < scripts/parameters-seed-devnet.sql"
   },
   "dependencies": {
+    "@pr402/subscription-seller": "file:../x402-subscription-seller",
+    "@solana/web3.js": "^1.98.0",
     "better-sqlite3": "^11.0.0",
+    "bs58": "^6.0.0",
     "dotenv": "^16.4.5",
     "express": "^4.21.2",
     "express-rate-limit": "^8.5.2",
-    "jsonwebtoken": "^9.0.3"
+    "jsonwebtoken": "^9.0.3",
+    "tweetnacl": "^1.0.3"
   },
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.11",

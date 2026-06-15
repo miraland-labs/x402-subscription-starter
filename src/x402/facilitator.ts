@@ -21,7 +21,7 @@ export class FacilitatorClient {
   }
 
   async verifyAndSettle(body: unknown): Promise<Record<string, unknown>> {
-    const verifyRes = await fetch(this.verifyUrl, {
+    const verifyRes = await fetchWithRetry(this.verifyUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
@@ -52,7 +52,7 @@ export class FacilitatorClient {
       settleBody['correlationId'] = cid;
     }
 
-    const settleRes = await fetch(this.settleUrl, {
+    const settleRes = await fetchWithRetry(this.settleUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(settleBody),
@@ -71,6 +71,26 @@ export class FacilitatorClient {
     }
     return JSON.parse(settleText) as Record<string, unknown>;
   }
+}
+
+async function fetchWithRetry(
+  url: string,
+  init: RequestInit,
+  attempts = 5,
+  delayMs = 2000,
+): Promise<Response> {
+  let last: unknown;
+  for (let i = 0; i < attempts; i += 1) {
+    try {
+      return await fetch(url, init);
+    } catch (err) {
+      last = err;
+      if (i < attempts - 1) {
+        await new Promise((resolve) => setTimeout(resolve, delayMs));
+      }
+    }
+  }
+  throw last;
 }
 
 function isDuplicateSettleBody(body: string): boolean {

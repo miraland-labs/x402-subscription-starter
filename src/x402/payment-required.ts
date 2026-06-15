@@ -1,5 +1,5 @@
 import { AppDb } from '../db.js';
-import { Tier, TIER_LABELS } from '../subscription.js';
+import { Tier, TIER_LABELS } from '@pr402/subscription-seller';
 
 export type AcceptsRow = {
   scheme: string;

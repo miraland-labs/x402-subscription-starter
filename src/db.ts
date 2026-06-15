@@ -68,7 +68,7 @@ export class AppDb {
       SELECT param_value FROM parameters
       WHERE service = ? AND endpoint = '*' AND param_name = ? AND inactive = 0
     `);
-    res = stmt.get(service, '*', paramName) as ParameterRow | undefined;
+    res = stmt.get(service, paramName) as ParameterRow | undefined;
     if (res) return res.param_value;
 
     return null;
@@ -89,7 +89,7 @@ export class AppDb {
       .run(payer, tier, issuedAt.toISOString(), expiresAt.toISOString(), txSig ?? null);
   }
 
-  public isTokenRevoked(payer: string, issuedAtIso: string): boolean {
+  public lookupSubscription(payer: string, issuedAtIso: string): { revoked: boolean } | null {
     const row = this.db
       .prepare(
         `SELECT revoked FROM subscriptions
@@ -97,8 +97,15 @@ export class AppDb {
       )
       .get(payer, issuedAtIso) as { revoked: number } | undefined;
 
+    if (!row) return null;
+    return { revoked: row.revoked !== 0 };
+  }
+
+  /** Strict policy: missing row counts as revoked. Prefer SDK store for new code. */
+  public isTokenRevoked(payer: string, issuedAtIso: string): boolean {
+    const row = this.lookupSubscription(payer, issuedAtIso);
     if (!row) return true;
-    return row.revoked !== 0;
+    return row.revoked;
   }
 
   public revokeToken(payer: string, issuedAtIso: string): boolean {
