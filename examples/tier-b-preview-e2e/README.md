@@ -23,7 +23,7 @@ Stack:
    node /path/to/subscription-auth/scripts/register-service.mjs \
      --keypair /path/to/seller-keypair.json
    ```
-4. **Buyer wallet:** Ensure your buyer wallet is funded with devnet USDC. See the [client example](https://github.com/miralandlabs/x402-subscription-client/blob/main/examples/tier-b-preview-e2e/README.md).
+4. **Buyer wallet:** Ensure your buyer wallet is funded with devnet USDC. See the [client example](https://github.com/miraland-labs/x402-subscription-client/blob/main/examples/tier-b-preview-e2e/README.md).
 
 ---
 
@@ -54,7 +54,7 @@ chmod +x run-seller.sh && ./run-seller.sh
 
 Expect: `curl http://127.0.0.1:3000/health` → `"subscriptionMode":"tier-b"`.
 
-Buyer (other terminal): [client Tier B example](https://github.com/miralandlabs/x402-subscription-client/blob/main/examples/tier-b-preview-e2e/README.md).
+Buyer (other terminal): [client Tier B example](https://github.com/miraland-labs/x402-subscription-client/blob/main/examples/tier-b-preview-e2e/README.md).
 
 ---
 
