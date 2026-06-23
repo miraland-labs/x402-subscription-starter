@@ -61,7 +61,7 @@ Details: [examples/tier-b-preview-e2e/README.md](examples/tier-b-preview-e2e/REA
 
 One JWT per x402 payment. Buyers must **save the token locally** until `exp`. Renew via `/subscribe` on `TOKEN_EXPIRED`.
 
-Subscribe response includes `persistenceHint`. Buyer SDK: [x402-subscription-client](https://github.com/miralandlabs/x402-subscription-client).
+Subscribe response includes `persistenceHint`. Buyer SDK: [x402-subscription-client](https://github.com/miraland-labs/x402-subscription-client).
 
 ---
 
@@ -73,9 +73,8 @@ Copy `POST /api/v1/echo` in `src/server.ts` — add handlers behind `requireBear
 
 ## Docs
 
-- [SUBSCRIPTION_PATTERN.md](https://github.com/miralandlabs/x402/blob/master/SUBSCRIPTION_PATTERN.md)
+- [SUBSCRIPTION_PATTERN.md](https://github.com/miraland-labs/x402/blob/master/SUBSCRIPTION_PATTERN.md)
 - [SUBSCRIPTION_AUTH_FOR_SELLERS.md](https://github.com/miralandlabs/subscription-auth/blob/main/docs/SUBSCRIPTION_AUTH_FOR_SELLERS.md)
-- [x402-seller-starter](https://github.com/miralandlabs/x402-seller-starter) — x402 env contract
-- Operated example: `https://fifa.polystrike.io/devnet` (`GET /health`)
+- [x402-seller-starter](https://github.com/miraland-labs/x402-seller-starter) — x402 env contract
 
 Production DB: SQLite for reference; Postgres supported with same schema.
